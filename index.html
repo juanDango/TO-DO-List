@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue CDN</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ titulo }}</h1>
+        <h3>{{ tareaLista }}</h3>
+        <input v-model="tareaLista">
+        <button v-on:click="agregarTarea(tareaLista)">agregar tarea a la lista</button>
+        <ul v-for="tarea in tareas">
+            <li><button v-on:click="eliminarTarea(tarea.elemento)">{{tarea.elemento}}</button></li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                titulo: 'To Do list',
+
+                tareaLista: '',
+
+                tareas: [
+                    {elemento: 'todo list'},
+                ],
+            },
+            methods: {
+                agregarTarea: function(tarea){
+                    if(tarea.trim)
+                    {
+                    this.tareas.push({elemento: tarea});
+                    this.tareaLista = '';
+                    }else{
+                        alert('favor introducir nombre antes de agregar');
+                    }
+                },
+                eliminarTarea: function(tarea){
+                    var pos = this.tareas.indexOf(tarea);
+                    console.log(this.tareas.indexOf(tarea));
+                    this.tareas.splice(pos, 1);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
